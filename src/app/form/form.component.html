@@ -1,1 +1,91 @@
-<p>form works!</p>
+<div class="mat-app-background">
+  <div style="position: relative; height: 350px; overflow: hidden">
+    <img src="assets/banner.jpg" alt="banner" style="width: 100%; height: auto;">
+    <h2
+      style="position: absolute;background: wheat;border-radius: 18px; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold;font-size: x-large; padding: 15px;color: #3f51b5">
+      Jetzt beginnen mit der Kleiderspenden-Registrierung</h2>
+  </div>
+  <div style="display: flex; justify-content: center;align-items: center;margin: 15px 0 15px 0">
+    <mat-chip-listbox  [(ngModel)]="collection">
+      <mat-chip-option style="height: 50px;" [value]="true">Abholung</mat-chip-option>
+      <mat-chip-option style="height: 50px;" [value]="false">Übergabe an der Geschäftsstelle</mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+  <div style="margin: 45px">
+    <form #myForm="ngForm" class="form-container" (ngSubmit)="onSubmit(myForm)">
+      <ng-container *ngIf="collection">
+        <mat-form-field class="column-2" appearance="outline">
+          <mat-label>Anrede</mat-label>
+          <mat-select name="formOfAddress" required [(ngModel)]="clothingDonationRequest.customer.formOfAddress">
+            <mat-option value="Herr">Herr</mat-option>
+            <mat-option value="Frau">Frau</mat-option>
+            <mat-option value="Divers">Divers</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="column-2" appearance="outline">
+          <mat-label>Titel</mat-label>
+          <input name="title" [(ngModel)]="clothingDonationRequest.customer.title" matInput>
+        </mat-form-field>
+        <mat-form-field class="column-2" appearance="outline">
+          <mat-label>Vorname</mat-label>
+          <input name="firstname" required [(ngModel)]="clothingDonationRequest.customer.firstname" matInput>
+        </mat-form-field>
+        <mat-form-field class="column-2" appearance="outline">
+          <mat-label>Nachname</mat-label>
+          <input name="lastname" required [(ngModel)]="clothingDonationRequest.customer.lastname" matInput>
+        </mat-form-field>
+        <mat-form-field class="column-3" appearance="outline">
+          <mat-label>Straße</mat-label>
+          <input name="street" required [(ngModel)]="clothingDonationRequest.customer.address.street" matInput>
+        </mat-form-field>
+        <mat-form-field class="column-1" appearance="outline">
+          <mat-label>Hausnummer</mat-label>
+          <input name="houseNumber" required [(ngModel)]="clothingDonationRequest.customer.address.houseNumber"
+                 matInput>
+        </mat-form-field>
+        <mat-form-field class="column-1" appearance="outline">
+          <mat-label>Postleitzahl</mat-label>
+          <input name="zipcode" minlength="4" maxlength="5" pattern="[0-9]*" required
+                 [(ngModel)]="clothingDonationRequest.customer.address.zipcode" matInput>
+        </mat-form-field>
+        <mat-form-field class="column-3" appearance="outline">
+          <mat-label>Stadt</mat-label>
+          <input name="city" required [(ngModel)]="clothingDonationRequest.customer.address.city" matInput>
+        </mat-form-field>
+        <mat-form-field class="column-2" appearance="outline">
+          <mat-label>Land</mat-label>
+          <mat-select name="country" required [(ngModel)]="clothingDonationRequest.customer.address.country">
+            <mat-option value="Deutschland">Deutschland</mat-option>
+            <mat-option value="Österreich">Österreich</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="column-2" appearance="outline">
+          <mat-label>E-Mail</mat-label>
+          <input name="email" type="email" required email [(ngModel)]="clothingDonationRequest.customer.email"
+                 matInput>
+        </mat-form-field>
+      </ng-container>
+      <mat-form-field class="column-4" appearance="outline">
+        <mat-label>Art der Kleider</mat-label>
+        <mat-select name="clothesType" required [(ngModel)]="clothingDonationRequest.clothesType">
+          <mat-option value="Pullover">Pullover</mat-option>
+          <mat-option value="Hose">Hose</mat-option>
+          <mat-option value="Jacke">Jacke</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="column-4" appearance="outline">
+        <mat-label>Krisengebiet</mat-label>
+        <mat-select name="crisisArea" required [(ngModel)]="clothingDonationRequest.crisisArea">
+          <mat-option *ngFor="let crisisArea of crisisAreas" [value]="crisisArea">{{ crisisArea.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">
+        Jetzt registrieren!
+        <mat-icon iconPositionEnd>diversity_1</mat-icon>
+      </button>
+    </form>
+
+  </div>
+
+
+</div>

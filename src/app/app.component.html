@@ -1,8 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="header" color="primary">
   <button mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>
   <span>Kleiderspenden-Registrierung</span>
+  <button mat-icon-button>
+    <mat-icon>volunteer_activism</mat-icon>
+  </button>
   <span class="spacer"></span>
   <button mat-icon-button>
     <mat-icon>contact_mail</mat-icon>
@@ -12,3 +15,7 @@
   </button>
 </mat-toolbar>
 <router-outlet />
+
+<mat-toolbar *ngIf="footerVisible" class="footer" color="primary">
+  <span>Footer</span>
+</mat-toolbar>

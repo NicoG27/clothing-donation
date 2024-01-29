@@ -1,0 +1,27 @@
+.form-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+}
+
+.form-container .column-1 {
+  grid-column: span 1;
+}
+
+.form-container .column-2 {
+  grid-column: span 2;
+}
+
+.form-container .column-3 {
+  grid-column: span 3;
+}
+
+.form-container .column-4 {
+  grid-column: span 4;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    grid-template-columns: 1fr;
+  }
+}
