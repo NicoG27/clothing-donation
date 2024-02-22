@@ -1,4 +1,4 @@
-export class CrisisArea {
+export class Office {
   name: string;
   zipcodes: string[];
 

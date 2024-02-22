@@ -1,7 +1,31 @@
+.main-card {
+  padding: 25px;
+  border-radius: 15px;
+  margin: 45px
+}
+
+.banner {
+  position: relative;
+  height: 350px;
+  overflow: hidden;
+}
+.banner-text {
+  position: absolute;
+  background: white;
+  border-radius: 18px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: x-large;
+  padding: 15px;
+  color: #3f51b5
+}
 .form-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1em;
+  margin: 15px 25px;
 }
 
 .form-container .column-1 {
@@ -21,7 +45,31 @@
 }
 
 @media (max-width: 600px) {
-  .form-container {
-    grid-template-columns: 1fr;
+  .form-container .column-1,
+  .form-container .column-2,
+  .form-container .column-3,
+  .form-container .column-4, {
+    grid-column: span 4;
+  }
+  .banner {
+    height: 200px;
+  }
+  .banner-text {
+    font-size: larger;
   }
 }
+@media (max-width: 450px) {
+  .form-container .column-1,
+  .form-container .column-2,
+  .form-container .column-3,
+  .form-container .column-4, {
+    grid-column: span 4;
+  }
+  .banner {
+    height: 150px;
+  }
+  .banner-text {
+    font-size: medium;
+  }
+}
+

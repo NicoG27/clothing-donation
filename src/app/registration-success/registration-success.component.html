@@ -1,0 +1,42 @@
+<div class="mat-app-background">
+
+  <mat-card style="border-radius: 15px;margin: 45px;" appearance="raised">
+    <div class="form-container">
+      <h2 class="column-4">
+        <mat-icon matIconPrefix style="color: green;top: 5px;position: relative">check_circle</mat-icon>
+        Registrierung erfolgreich - Wir freuen uns auf Ihre Spende!
+      </h2>
+      <mat-form-field class="column-2" appearance="outline">
+        <mat-label>Art der Kleidung</mat-label>
+        <input readonly matInput [value]="item.clothesType">
+        <mat-icon matIconPrefix color="primary">checkroom</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="column-2" appearance="outline">
+        <mat-label>Krisengebiet</mat-label>
+        <input readonly [value]="item.crisisArea?.name" matInput>
+        <mat-icon matIconPrefix color="primary">public</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="column-1" appearance="outline">
+        <mat-label>Datum</mat-label>
+        <input readonly [value]="date |date:'dd.MM.yyyy'" matInput>
+        <mat-icon matIconPrefix color="primary">event</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="column-1" appearance="outline">
+        <mat-label>Uhrzeit</mat-label>
+        <input readonly [value]="time" matInput>
+        <mat-icon matIconPrefix color="primary">access_time</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="column-2" appearance="outline">
+        <mat-label>Ort</mat-label>
+        <input readonly [value]="item.customer.address.city ? item.customer.address.city : item.crisisArea?.name" matInput>
+        <mat-icon matIconPrefix color="primary">place</mat-icon>
+      </mat-form-field>
+      <div style="grid-column: span 4; justify-self: start">
+        <button mat-raised-button color="primary" (click)="back()">
+          Zurück
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>

@@ -1,10 +1,10 @@
 import {Customer} from "./customer";
-import {CrisisArea} from "./crisisArea";
+import {Office} from "./office";
 
 export class ClothingDonationRequest {
   customer: Customer;
   clothesType?: string;
-  crisisArea?: CrisisArea;
+  crisisArea?: Office;
 
 
   constructor(customer: Customer) {
