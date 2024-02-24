@@ -13,7 +13,7 @@
       </mat-form-field>
       <mat-form-field class="column-2" appearance="outline">
         <mat-label>Krisengebiet</mat-label>
-        <input readonly [value]="item.crisisArea?.name" matInput>
+        <input readonly [value]="item.crisisArea" matInput>
         <mat-icon matIconPrefix color="primary">public</mat-icon>
       </mat-form-field>
       <mat-form-field class="column-1" appearance="outline">
@@ -26,10 +26,15 @@
         <input readonly [value]="time" matInput>
         <mat-icon matIconPrefix color="primary">access_time</mat-icon>
       </mat-form-field>
-      <mat-form-field class="column-2" appearance="outline">
+      <mat-form-field *ngIf="item.customer.address.city" class="column-2" appearance="outline">
         <mat-label>Ort</mat-label>
-        <input readonly [value]="item.customer.address.city ? item.customer.address.city : item.crisisArea?.name" matInput>
+        <input readonly [value]="item.customer.address.city" matInput>
         <mat-icon matIconPrefix color="primary">place</mat-icon>
+      </mat-form-field>
+      <mat-form-field *ngIf="item.office" class="column-2" appearance="outline">
+        <mat-label>Geschäftsstelle</mat-label>
+        <input readonly [value]="item.office" matInput>
+        <mat-icon matIconPrefix color="primary">business</mat-icon>
       </mat-form-field>
       <div style="grid-column: span 4; justify-self: start">
         <button mat-raised-button color="primary" (click)="back()">

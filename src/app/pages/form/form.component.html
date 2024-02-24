@@ -1,16 +1,16 @@
-<div class="mat-app-background" style="padding-bottom: 15px">
+<div class="mat-app-background" style="padding-bottom: 45px">
   <div class="banner">
-    <img src="assets/banner.jpg" alt="banner" style="width: 100%; height: auto;">
+    <img ngSrc="assets/banner.jpg" alt="banner" style="width: 100%; height: auto;" height="658" width="1243">
     <h2 class="banner-text">Jetzt beginnen mit der Kleiderspenden-Registrierung</h2>
   </div>
   <mat-card *ngIf="!isRegistered" class="main-card" appearance="raised">
-    <div *ngIf="!isRegistered" style="display: flex; justify-content: center;align-items: center;margin: 15px 0 15px 0">
+    <div style="display: flex; justify-content: center;align-items: center;margin: 15px 0 15px 0">
       <mat-chip-listbox [(ngModel)]="collection">
         <mat-chip-option style="height: 50px;" [value]="true">Abholung</mat-chip-option>
         <mat-chip-option style="height: 50px;" [value]="false">Übergabe an der Geschäftsstelle</mat-chip-option>
       </mat-chip-listbox>
     </div>
-    <form *ngIf="!isRegistered" #myForm="ngForm" class="form-container" (ngSubmit)="onSubmit(myForm)">
+    <form #myForm="ngForm" class="form-container" (ngSubmit)="onSubmit(myForm)">
       <ng-container *ngIf="collection">
         <mat-form-field class="column-2" appearance="outline">
           <mat-label>Anrede</mat-label>
@@ -19,36 +19,44 @@
             <mat-option value="Frau">Frau</mat-option>
             <mat-option value="Divers">Divers</mat-option>
           </mat-select>
+          <mat-icon matIconPrefix color="primary">face</mat-icon>
         </mat-form-field>
         <mat-form-field class="column-2" appearance="outline">
           <mat-label>Titel</mat-label>
           <input name="title" [(ngModel)]="clothingDonationRequest.customer.title" matInput>
+          <mat-icon matIconPrefix color="primary">school</mat-icon>
         </mat-form-field>
         <mat-form-field class="column-2" appearance="outline">
           <mat-label>Vorname</mat-label>
           <input name="firstname" required [(ngModel)]="clothingDonationRequest.customer.firstname" matInput>
+          <mat-icon matIconPrefix color="primary">person</mat-icon>
         </mat-form-field>
         <mat-form-field class="column-2" appearance="outline">
           <mat-label>Nachname</mat-label>
           <input name="lastname" required [(ngModel)]="clothingDonationRequest.customer.lastname" matInput>
+          <mat-icon matIconPrefix color="primary">person</mat-icon>
         </mat-form-field>
         <mat-form-field class="column-3" appearance="outline">
           <mat-label>Straße</mat-label>
           <input name="street" required [(ngModel)]="clothingDonationRequest.customer.address.street" matInput>
+          <mat-icon matIconPrefix color="primary">location_on</mat-icon>
         </mat-form-field>
         <mat-form-field class="column-1" appearance="outline">
           <mat-label>Hausnummer</mat-label>
           <input name="houseNumber" required [(ngModel)]="clothingDonationRequest.customer.address.houseNumber"
                  matInput>
+          <mat-icon matIconPrefix color="primary">home</mat-icon>
         </mat-form-field>
         <mat-form-field class="column-1" appearance="outline">
           <mat-label>Postleitzahl</mat-label>
           <input name="zipcode" minlength="4" maxlength="5" pattern="[0-9]*" required
                  [(ngModel)]="clothingDonationRequest.customer.address.zipcode" matInput>
+          <mat-icon matIconPrefix color="primary">location_city</mat-icon>
         </mat-form-field>
         <mat-form-field class="column-3" appearance="outline">
           <mat-label>Stadt</mat-label>
           <input name="city" required [(ngModel)]="clothingDonationRequest.customer.address.city" matInput>
+          <mat-icon matIconPrefix color="primary">location_city</mat-icon>
         </mat-form-field>
         <mat-form-field class="column-2" appearance="outline">
           <mat-label>Land</mat-label>
@@ -57,27 +65,44 @@
             <mat-option value="Österreich">Österreich</mat-option>
             <mat-option value="Schweiz">Schweiz</mat-option>
           </mat-select>
+          <mat-icon matIconPrefix color="primary">public</mat-icon>
         </mat-form-field>
         <mat-form-field class="column-2" appearance="outline">
           <mat-label>E-Mail</mat-label>
           <input name="email" type="email" required email [(ngModel)]="clothingDonationRequest.customer.email"
                  matInput>
+          <mat-icon matIconPrefix color="primary">email</mat-icon>
         </mat-form-field>
       </ng-container>
       <mat-form-field class="column-4" appearance="outline">
         <mat-label>Art der Kleider</mat-label>
-        <mat-select name="clothesType" required [(ngModel)]="clothingDonationRequest.clothesType">
+        <mat-select name="clothesType" required [(ngModel)]="clothingDonationRequest.clothesType" multiple>
           <mat-option value="Pullover">Pullover</mat-option>
-          <mat-option value="Hose">Hose</mat-option>
+          <mat-option value="lange Hose">Lange Hose</mat-option>
+          <mat-option value="kurze Hose">Lange Hose</mat-option>
+          <mat-option value="T-Shirt">T-Shirt</mat-option>
+          <mat-option value="Jacke">Jacke</mat-option>
+          <mat-option value="Mütze">Mütze</mat-option>
           <mat-option value="Jacke">Jacke</mat-option>
         </mat-select>
+        <mat-icon matIconPrefix color="primary">checkroom</mat-icon>
       </mat-form-field>
       <mat-form-field class="column-4" appearance="outline">
         <mat-label>Krisengebiet</mat-label>
         <mat-select name="crisisArea" required [(ngModel)]="clothingDonationRequest.crisisArea">
           <mat-option *ngFor="let crisisArea of crisisAreas" [value]="crisisArea">{{ crisisArea }}</mat-option>
         </mat-select>
+        <mat-icon matIconPrefix color="primary">public</mat-icon>
       </mat-form-field>
+      <ng-container *ngIf="!collection">
+        <mat-form-field class="column-4" appearance="outline">
+          <mat-label>Geschäftsstelle</mat-label>
+          <mat-select name="office" required [(ngModel)]="clothingDonationRequest.office">
+            <mat-option *ngFor="let office of offices" [value]="office.name">{{ office.name }}</mat-option>
+          </mat-select>
+          <mat-icon matIconPrefix color="primary">business</mat-icon>
+        </mat-form-field>
+      </ng-container>
       <span class="column-4" style="color: red" *ngIf="!myForm.valid && myForm.submitted"><mat-icon
         style="position: relative; top: 5px;margin-right: 5px" color="warn">error</mat-icon>Bitte füllen Sie die rot markierten Pflichtfelder aus</span>
       <span class="column-4" style="color: red" *ngIf="errorMessage"><mat-icon
@@ -91,5 +116,6 @@
       </div>
     </form>
   </mat-card>
-  <app-registration-success (backEvent)="isRegistered = $event" [item]="clothingDonationRequest" *ngIf="isRegistered"></app-registration-success>
+  <app-registration-success (backEvent)="isRegistered = $event" [item]="clothingDonationRequest"
+                            *ngIf="isRegistered"></app-registration-success>
 </div>

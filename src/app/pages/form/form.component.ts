@@ -15,14 +15,14 @@ import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-to
 import {MatFormField, MatLabel, MatPrefix, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
-import {ClothingDonationRequest} from "../@model/clothingDonationRequest";
-import {Customer} from "../@model/customer";
 import {FormsModule, NgForm} from "@angular/forms";
-import {Address} from "../@model/address";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
-import {Office} from "../@model/office";
 import {MatChipListbox, MatChipOption} from "@angular/material/chips";
 import {RegistrationSuccessComponent} from "../registration-success/registration-success.component";
+import {ClothingDonationRequest} from "../../@model/clothingDonationRequest";
+import {Customer} from "../../@model/customer";
+import {Address} from "../../@model/address";
+import {Office} from "../../@model/office";
 
 @Component({
   selector: 'app-form',
@@ -80,6 +80,7 @@ export class FormComponent {
   onSubmit(myForm: NgForm) {
     if (myForm.valid && (!this.collection || this.checkOffices(myForm.controls['zipcode'].value, this.offices.flatMap(office => office.zipcodes)))) {
       this.isRegistered = true;
+      this.errorMessage = '';
     } else if (myForm.controls['zipcode'].value) {
       this.errorMessage = "Ihre Postleitzahl ist nicht im Bereich einer unserer Geschäftstellen. Wir sind vertreten in folgenden Bezirken: " + this.offices.flatMap(office => office.name).join(', ');
     }
