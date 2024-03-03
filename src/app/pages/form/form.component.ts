@@ -61,33 +61,33 @@ import {Office} from "../../@model/office";
 })
 export class FormComponent {
   clothingDonationRequest: ClothingDonationRequest = {customer: new Customer(new Address())};
-
   collection: boolean = true;
   isRegistered: boolean = false;
   errorMessage = '';
-  crisisAreas= ["Ukraine", "Syrien", "Afghanistan", "Irak", "Somalia", "Kongo"];
+  crisisAreas = ["Ukraine", "Syrien", "Afghanistan", "Irak", "Somalia", "Kongo"];
   offices: Office[] = [
-    { name: "Hamburg Wandsbek", zipcodes: ["22041", "22047", "22049", "22089"]},
-    { name: "Hamburg Wilhelmsburg", zipcodes: ["20539", "21107", "21109"]},
-    { name: "Hamburg St. Pauli", zipcodes: ["20354", "20355", "20357", "20359", "22767", "22769"]},
-    { name: "Berlin Mitte", zipcodes: ["10115", "10117", "10119", "10178", "10179"]},
-    { name: "Berlin Prenzlauer Berg", zipcodes: ["10405", "10407", "10409", "10435", "10437", "10439"]},
-    { name: "Berlin Friedrichshain", zipcodes: ["10243", "10245", "10247", "10249"]},
-    { name: "Berlin Kreuzberg", zipcodes: ["10961", "10963", "10965", "10967", "10997", "10999"]},
-    { name: "Berlin Neukölln", zipcodes: ["12043", "12045", "12047", "12049", "12051", "12053", "12055", "12057", "12059"]}
+    {name: "Hamburg Wandsbek", zipcodes: ["22041", "22047", "22049", "22089"]},
+    {name: "Hamburg Wilhelmsburg", zipcodes: ["20539", "21107", "21109"]},
+    {name: "Hamburg St. Pauli", zipcodes: ["20354", "20355", "20357", "20359", "22767", "22769"]},
+    {name: "Berlin Mitte", zipcodes: ["10115", "10117", "10119", "10178", "10179"]},
+    {name: "Berlin Prenzlauer Berg", zipcodes: ["10405", "10407", "10409", "10435", "10437", "10439"]},
+    {name: "Berlin Friedrichshain", zipcodes: ["10243", "10245", "10247", "10249"]},
+    {name: "Berlin Kreuzberg", zipcodes: ["10961", "10963", "10965", "10967", "10997", "10999"]},
+    {name: "Berlin Neukölln", zipcodes: ["12043", "12045", "12047", "12049", "12051", "12053", "12055", "12057", "12059"]}
   ];
 
   onSubmit(myForm: NgForm) {
+    // This condition checks if the form is valid and if either the user chose to donate in an office or if the entered zipcode matches any of the office zipcodes.
     if (myForm.valid && (!this.collection || this.checkOffices(myForm.controls['zipcode'].value, this.offices.flatMap(office => office.zipcodes)))) {
       this.isRegistered = true;
       this.errorMessage = '';
+      // If the zipcode is provided but doesn't match any office, it generates an error message listing the available office areas.
     } else if (myForm.controls['zipcode'].value) {
       this.errorMessage = "Ihre Postleitzahl ist nicht im Bereich einer unserer Geschäftstellen. Wir sind vertreten in folgenden Bezirken: " + this.offices.flatMap(office => office.name).join(', ');
     }
   }
 
   checkOffices(zipcode: string, zipcodes: string[]) {
-    return zipcodes.some(value => value.substring(0,2) === zipcode.substring(0,2));
+    return zipcodes.some(value => value.substring(0, 2) === zipcode.substring(0, 2));
   }
-
 }

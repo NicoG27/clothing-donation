@@ -1,26 +1,3 @@
 .spacer {
   flex: 1 1 auto;
 }
-
-/* Mobile and Tablet styles */
-@media only screen and (max-width: 768px) {
-  .toolbar-left {
-    display: none;
-  }
-  .toolbar-right {
-    display: flex;
-    justify-content: flex-end;
-  }
-}
-
-/* Desktop styles */
-@media only screen and (min-width: 769px) {
-  .toolbar-left {
-    display: flex;
-    justify-content: flex-start;
-  }
-  .toolbar-right {
-    display: flex;
-    justify-content: flex-end;
-  }
-}
