@@ -6,7 +6,6 @@ export class ClothingDonationRequest {
   crisisArea?: string;
   office?: string;
 
-
   constructor(customer: Customer) {
     this.customer = customer;
   }
