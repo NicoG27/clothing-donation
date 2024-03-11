@@ -8,7 +8,6 @@ export class Customer {
   email?: string;
   address: Address;
 
-
   constructor(address: Address) {
     this.address = address;
   }

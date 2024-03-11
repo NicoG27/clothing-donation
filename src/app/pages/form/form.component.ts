@@ -85,7 +85,7 @@ export class FormComponent {
   onSubmit(myForm: NgForm): void {
     // This condition checks if the form is valid and if either the user chose to donate in an office or if the entered zipcode matches any of the office zipcodes.
     if (myForm.valid && (!this.collection || this.checkOffices(myForm.controls['zipcode'].value, this.offices.flatMap(office => office.zipcodes)))) {
-      this.isRegistered = false;
+      this.isRegistered = true;
       this.postData(this.clothingDonationRequest);
       this.errorMessage = '';
       // If the zipcode is provided but doesn't match any office, it generates an error message listing the available office areas.
@@ -94,13 +94,18 @@ export class FormComponent {
     }
   }
 
-  postData(data: ClothingDonationRequest): void {
-    this.http.post<string[]>('http://localhost:8080/save', data).subscribe(() => {
-      this.snackBar.open("Kleiderspenden erfolgreich registriert!", '', {duration: 3000})
-    });
-  }
-
   checkOffices(zipcode: string, zipcodes: string[]): boolean {
     return zipcodes.some(value => value.substring(0, 2) === zipcode.substring(0, 2));
+  }
+
+  postData(data: ClothingDonationRequest): void {
+    this.http.post<string[]>('http://localhost:8080/save', data).subscribe({
+      next: () => {
+        this.snackBar.open("Kleiderspenden erfolgreich registriert!", '', {duration: 3000});
+      },
+      error: (error) => {
+        this.snackBar.open("Es ist ein Fehler aufgetreten:" + error, '', {duration: 3000});
+      }
+    });
   }
 }
